@@ -6,6 +6,7 @@
 - WQD180041 - MUHAMMAD HAFIZ BIN KHAIRUDIN
 - WQD190039 - JONATHAN KOW YEE SENG
 - WQD170100 - SYAIFUL ANUAR BIN ABD LATIF
+- WQD180027 - LIM SHIEN LONG
 ## Architecture Diagram
 
 ## Application Features
@@ -18,6 +19,11 @@
 - If not, the program will abort the request; whereas, if yes, the transfer will succeed
 - The balance amount of transferor will be deducted and the balance amount of transferee will be added with the amount of transfer.
 ### User can calculate loan
+- User will be able to calculate monthly car loan payments required. 
+- Input parameters are: Car price, downpayment, loan period (years), interest rate.
+- Output parameter: Monthly payment.
+- The car loan calculation formula:
+  - (((carprice - downpayment) * (interest / 100) * periodyear) + (carprice - downpayment))/(periodyear * 12)
 
 ## Web Services (Backend)
 
