@@ -48,7 +48,7 @@ const Index: NextPage<Props> = ({ uuid, currency, amount }) => {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="static" style={{marginBottom: 30}}>
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <MenuIcon />

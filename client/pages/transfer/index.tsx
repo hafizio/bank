@@ -35,7 +35,7 @@ const Index = () => {
 
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="static" style={{marginBottom: 30}}>
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
@@ -94,7 +94,7 @@ const Index = () => {
                   />
                 </Grid>
               </Grid>
-              <Grid item xs={12} sm={12}>
+              <Grid item xs={12} sm={12} style={{marginTop: 30}}>
                 <Button type="submit" variant="contained" color="secondary" size="large">
                   Submit
                 </Button>
@@ -103,6 +103,11 @@ const Index = () => {
           </React.Fragment>
         </CardContent>
       </Card>
+      <style jsx global>{`
+        body { 
+          background: lightgray;
+        }
+      `}</style>
     </div>
   );
 }
