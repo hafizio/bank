@@ -1,6 +1,7 @@
-## Project
-- Banking System
-  - Demo of 3 back-end web services such as balance checking, perform transfers of monies from their bank account to transferor's and calculate monthly repayments for car loan. 
+## Group Project: WQD7008 - Service Oriented Architecture (SOA)
+
+### Banking System
+- Demo of 3 backend web services such as balance checking, perform transfers of monies from their bank account to transferor's and calculate monthly repayments for car loan. 
 
 ## Team Members
 - WQD180041 - MUHAMMAD HAFIZ BIN KHAIRUDIN
@@ -15,6 +16,7 @@
 - 1 client service is written in JavaScript - Frontend
 
 ## Application Features
+
 ### User can check balance
 - User will be able to check their account balance from their 'Savings Account'
 - User even display user's unique ID
