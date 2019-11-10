@@ -49,52 +49,48 @@ const Index = () => {
         <CardContent>
           <React.Fragment>
             <Typography variant="h6" gutterBottom>
-              Balance Transfer
+              Loan Calculator
           </Typography>
-            <form action={process.env.TRANSFER_SERVICE_URL} method="POST">
+            <form action={process.env.LOAN_SERVICE_URL} method="POST">
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    disabled
-                    value={localStorage.accountId && localStorage.accountId}
-                    id="accountTransferor"
-                    name="accountTransferor"
-                    label="Account ID"
+                    id="carprice"
+                    name="carprice"
+                    label="Car Price (MYR)"
                     fullWidth
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    disabled
-                    value={localStorage && localStorage.balance}
-                    id="balanceTransferor"
-                    name="balanceTransferor"
-                    label="Balance Transferor (MYR)"
+                    id="downpayment"
+                    name="downpayment"
+                    label="Down Payment (MYR)"
                     fullWidth
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    id="accountTransferee"
-                    name="accountTransferee"
-                    label="Transferee Account ID"
+                    id="periodyear"
+                    name="periodyear"
+                    label="Loan Period (Years)"
                     fullWidth
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    id="transferAmount"
-                    name="transferAmount"
-                    label="Transfer Amount (MYR)"
+                    id="interest"
+                    name="interest"
+                    label="Interest Rate (% per annum)"
                     fullWidth
                   />
                 </Grid>
               </Grid>
-              <Grid item xs={12} sm={12}>
+              <Grid item xs={12} sm={12} style={{marginTop: 30}}>
                 <Button type="submit" variant="contained" color="secondary" size="large">
                   Submit
                 </Button>
@@ -103,6 +99,11 @@ const Index = () => {
           </React.Fragment>
         </CardContent>
       </Card>
+      <style jsx global>{`
+        body { 
+          background: lightgray;
+        }
+      `}</style>
     </div>
   );
 }

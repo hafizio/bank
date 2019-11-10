@@ -45,3 +45,6 @@
 
 ### Transfer Page
 ![Transfer](/screenshots/transfer.png?raw=true "Transfer Page")
+
+### Loan Page
+![Loan](/screenshots/loan.png?raw=true "Loan Page")
