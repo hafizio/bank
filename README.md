@@ -7,7 +7,6 @@
 - WQD190039 - JONATHAN KOW YEE SENG
 - WQD170100 - SYAIFUL ANUAR BIN ABD LATIF
 - WQD180027 - LIM SHIEN LONG
-## Architecture Diagram
 
 ## Application Features
 ### User can check balance
@@ -27,6 +26,16 @@
 - The car loan calculation formula:
   - (((carprice - downpayment) * (interest / 100) * periodyear) + (carprice - downpayment))/(periodyear * 12)
 
-## Web Services (Backend)
-
 ## Client Service (Frontend) 
+
+### Microservices Orchestration using Docker
+![Microservices](/screenshots/microservices.png?raw=true "Microservices")
+
+### Home Page
+![Homepage](/screenshots/homepage.png?raw=true "Home Page")
+
+### Balance Page
+![Balance](/screenshots/balance.png?raw=true "Balance Page")
+
+### Transfer Page
+![Transfer](/screenshots/transfer.png?raw=true "Transfer Page")
