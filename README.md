@@ -8,6 +8,12 @@
 - WQD170100 - SYAIFUL ANUAR BIN ABD LATIF
 - WQD180027 - LIM SHIEN LONG
 
+## Application Architecture
+- Microservices are isolated using Docker and orchestrated using Docker Compose
+- Each service has a webserver on a dedicated port in localhost
+- 3 web services are written in Go (https://golang.org/) - Backend
+- 1 client service is written in JavaScript - Frontend
+
 ## Application Features
 ### User can check balance
 - User will be able to check their account balance from their 'Savings Account'
