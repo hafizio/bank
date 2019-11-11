@@ -5,6 +5,7 @@ import (
 	"strconv"
 	"math"
 	"fmt"
+	"math/rand"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -16,7 +17,7 @@ type Transfer struct {
 	//Bankaccount_transferee string `json:"bankaccount_transferee"`
 	Message string `json:"message"`
 	Balance_transferor float64 `json:"balance_transferor"`
-	Balance_transferee float64 `json:"balance_transferee"`
+	//Balance_transferee float64 `json:"balance_transferee"`
 	
 }
 
@@ -52,7 +53,7 @@ func main() {
 		//bankaccount_transferor, _ := c.FormValue("bankaccount_transferor")
 		//bankaccount_transferee, _ := c.FormValue("bankaccount_transferee")
 		balance_transferor, _ := strconv.ParseFloat(c.FormValue("balance_transferor"), 64)
-		balance_transferee, _ := strconv.ParseFloat(c.FormValue("balance_transferee"), 64)
+		balance_transferee := math.Ceil((rand.Float64() * 1000) * 100) / 100
 		transfer_amount, _ := strconv.ParseFloat(c.FormValue("transfer_amount"), 64)
 		ans := status(balance_transferor, balance_transferee, transfer_amount)
 		balance_transferor, balance_transferee = result(balance_transferor, balance_transferee, transfer_amount)
@@ -60,7 +61,7 @@ func main() {
 			transfer := &Transfer{
 				Message: ans,
 				Balance_transferor: balance_transferor,
-				Balance_transferee: balance_transferee,
+				//Balance_transferee: balance_transferee,
 			}
 
 		return c.JSON(http.StatusOK, transfer)
