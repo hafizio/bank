@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { Card, CardContent, AppBar, Toolbar, IconButton } from '@material-ui/core';
+import { Card, CardContent, AppBar, Toolbar, IconButton, Snackbar } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,6 +29,32 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+async function postForm() {
+  let formElement = document.querySelector("form");
+  let formData = new FormData(formElement);
+
+  try {
+    const response = await fetch(process.env.TRANSFER_SERVICE_URL, {
+      method: 'POST',
+      body: formData
+    });
+
+    const result = await response.json();
+    let message = document.querySelector('#message-id') as HTMLInputElement
+
+    message.innerHTML = result.message
+
+    let balance = result.balance_transferor
+    let balanceField = document.querySelector('#balanceTransferor') as HTMLInputElement
+
+    balanceField.value = balance.toFixed(2);
+    localStorage.accountBalance = balance;
+    console.log('Success:', JSON.stringify(result));
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
 const Index = () => {
   const classes = useStyles({});
   const bull = <span className={classes.bullet}>•</span>;
@@ -51,13 +77,12 @@ const Index = () => {
             <Typography variant="h6" gutterBottom>
               Balance Transfer
           </Typography>
-            <form action={process.env.TRANSFER_SERVICE_URL} method="POST">
+            <form>
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    disabled
-                    value={localStorage.accountId && localStorage.accountId}
+                    defaultValue={localStorage.accountId && localStorage.accountId}
                     id="accountTransferor"
                     name="accountTransferor"
                     label="Account ID"
@@ -67,10 +92,10 @@ const Index = () => {
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    disabled
-                    value={localStorage && localStorage.balance}
+                    type="number"
+                    defaultValue={localStorage && localStorage.accountBalance}
                     id="balanceTransferor"
-                    name="balanceTransferor"
+                    name="balance_transferor"
                     label="Balance Transferor (MYR)"
                     fullWidth
                   />
@@ -79,23 +104,26 @@ const Index = () => {
                   <TextField
                     required
                     id="accountTransferee"
-                    name="accountTransferee"
+                    name="account_transferee"
                     label="Transferee Account ID"
+                    defaultValue="3ef42f2d-d656-40b1-b686-d8257d050c46"
                     fullWidth
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
+                    type="number"
                     id="transferAmount"
-                    name="transferAmount"
+                    name="transfer_amount"
                     label="Transfer Amount (MYR)"
+                    defaultValue="200.50"
                     fullWidth
                   />
                 </Grid>
               </Grid>
               <Grid item xs={12} sm={12} style={{marginTop: 30}}>
-                <Button type="submit" variant="contained" color="secondary" size="large">
+                <Button variant="contained" color="secondary" size="large" onClick={postForm}>
                   Submit
                 </Button>
               </Grid>
@@ -103,6 +131,13 @@ const Index = () => {
           </React.Fragment>
         </CardContent>
       </Card>
+      <Snackbar
+        open
+        ContentProps={{
+          'aria-describedby': 'message-id',
+        }}
+        message={<span id="message-id">Transfer page is interacting with a web service at: {process.env.TRANSFER_SERVICE_URL}</span>}
+      />
       <style jsx global>{`
         body { 
           background: lightgray;

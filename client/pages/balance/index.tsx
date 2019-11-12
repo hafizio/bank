@@ -10,6 +10,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import { Snackbar } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,9 +41,11 @@ type Props = {
     uuid: string
     currency: string
     amount: number
+    account_group: string
+    date: string
 }
 
-const Index: NextPage<Props> = ({ uuid, currency, amount }) => {
+const Index: NextPage<Props> = ({ date, account_group, uuid, currency, amount }) => {
     const classes = useStyles({});
     const bull = <span className={classes.bullet}>•</span>;
 
@@ -62,21 +65,45 @@ const Index: NextPage<Props> = ({ uuid, currency, amount }) => {
                 <CardContent>
                     <Typography className={classes.title} color="textSecondary" gutterBottom>
                         Account Balance
-                </Typography>
+                    </Typography>
+                    <Typography variant="h5" component="h2">
+                        Account Type
+                    </Typography>
+                    <Typography className={classes.pos} color="textSecondary">
+                        {account_group}
+                    </Typography>
                     <Typography variant="h5" component="h2">
                         Account ID
-                </Typography>
+                    </Typography>
                     <Typography className={classes.pos} color="textSecondary">
                         {uuid}
                     </Typography>
                     <Typography variant="h5" component="h2">
                         Amount
-                </Typography>
+                    </Typography>
                     <Typography className={classes.pos} color="textSecondary">
                         {currency} {amount}
                     </Typography>
+                    <Typography variant="h5" component="h2">
+                        Last Transaction At
+                    </Typography>
+                    <Typography className={classes.pos} color="textSecondary">
+                        {date}
+                    </Typography>
                 </CardContent>
             </Card>
+            <Snackbar
+                open
+                ContentProps={{
+                'aria-describedby': 'message-id',
+                }}
+                message={<span id="message-id">Balance page is interacting with a web service at: {process.env.BALANCE_SERVICE_URL}</span>}
+            />
+            <style jsx global>{`
+                body { 
+                background: lightgray;
+                }
+            `}</style>
         </div>
     )
 }
@@ -84,6 +111,8 @@ const Index: NextPage<Props> = ({ uuid, currency, amount }) => {
 Index.getInitialProps = async () => {
     const res = await fetch(process.env.BALANCE_SERVICE_URL)
     const data: Props = await res.json()
+
+    console.log(data)
 
     localStorage.accountId = data.uuid;
     localStorage.accountBalance = data.amount;

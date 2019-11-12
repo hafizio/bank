@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { Card, CardContent, AppBar, Toolbar, IconButton } from '@material-ui/core';
+import { Card, CardContent, AppBar, Toolbar, IconButton, Snackbar } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -133,6 +133,13 @@ const Index = () => {
           </React.Fragment>
         </CardContent>
       </Card>
+      <Snackbar
+        open
+        ContentProps={{
+          'aria-describedby': 'message-id',
+        }}
+        message={<span id="message-id">Loan page is interacting with a web service at: {process.env.LOAN_SERVICE_URL}</span>}
+      />
       <style jsx global>{`
         body { 
           background: lightgray;

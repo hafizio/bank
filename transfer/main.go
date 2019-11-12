@@ -17,7 +17,7 @@ type Transfer struct {
 	//Bankaccount_transferee string `json:"bankaccount_transferee"`
 	Message string `json:"message"`
 	Balance_transferor float64 `json:"balance_transferor"`
-	//Balance_transferee float64 `json:"balance_transferee"`
+	Balance_transferee float64 `json:"balance_transferee"`
 	
 }
 
@@ -58,11 +58,11 @@ func main() {
 		ans := status(balance_transferor, balance_transferee, transfer_amount)
 		balance_transferor, balance_transferee = result(balance_transferor, balance_transferee, transfer_amount)
 
-			transfer := &Transfer{
-				Message: ans,
-				Balance_transferor: balance_transferor,
-				//Balance_transferee: balance_transferee,
-			}
+		transfer := &Transfer{
+			Message: ans,
+			Balance_transferor: balance_transferor,
+			Balance_transferee: balance_transferee,
+		}
 
 		return c.JSON(http.StatusOK, transfer)
 	})
