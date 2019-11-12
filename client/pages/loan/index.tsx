@@ -29,6 +29,25 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+async function postForm() {
+  let formElement = document.querySelector("form");
+  let formData = new FormData(formElement);
+
+  try {
+    const response = await fetch(process.env.LOAN_SERVICE_URL, {
+      method: 'POST',
+      body: formData
+    });
+
+    const result = await response.json();
+    let monthlyField = document.querySelector('#monthly') as HTMLInputElement
+    monthlyField.value = result.mthly
+    console.log('Success:', JSON.stringify(result));
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
 const Index = () => {
   const classes = useStyles({});
   const bull = <span className={classes.bullet}>•</span>;
@@ -51,7 +70,7 @@ const Index = () => {
             <Typography variant="h6" gutterBottom>
               Loan Calculator
           </Typography>
-            <form action={process.env.LOAN_SERVICE_URL} method="POST">
+            <form>
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -59,6 +78,7 @@ const Index = () => {
                     id="carprice"
                     name="carprice"
                     label="Car Price (MYR)"
+                    defaultValue="90000"
                     fullWidth
                   />
                 </Grid>
@@ -68,6 +88,7 @@ const Index = () => {
                     id="downpayment"
                     name="downpayment"
                     label="Down Payment (MYR)"
+                    defaultValue="9000"
                     fullWidth
                   />
                 </Grid>
@@ -77,6 +98,7 @@ const Index = () => {
                     id="periodyear"
                     name="periodyear"
                     label="Loan Period (Years)"
+                    defaultValue="9"
                     fullWidth
                   />
                 </Grid>
@@ -86,12 +108,24 @@ const Index = () => {
                     id="interest"
                     name="interest"
                     label="Interest Rate (% per annum)"
+                    defaultValue="3.24"
                     fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    id="monthly"
+                    name="monthly"
+                    label="Monthly Payment (MYR)"
+                    defaultValue="??????"
+                    fullWidth
+                    disabled
                   />
                 </Grid>
               </Grid>
               <Grid item xs={12} sm={12} style={{marginTop: 30}}>
-                <Button type="submit" variant="contained" color="secondary" size="large">
+                <Button variant="contained" color="secondary" size="large" onClick={postForm}>
                   Submit
                 </Button>
               </Grid>
